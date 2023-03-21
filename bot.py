@@ -1,34 +1,28 @@
+# Importei as bibliotecas
+
+import pandas as pd
 import pyautogui as py
 import time
+# Dando as opções para o usuário escolher seu arquivo/coluna
+arquivo = input('Coloque o Arquivo na pasta e digite o nome dele.')
+coluna = input('Nome Coluna: ')
+# Pegando uma tebela, transformando tudo em string para poder digitar e colocar todos os itens de uma coluna em uma lista
+df = pd.DataFrame(pd.read_csv(arquivo))
+df = df.applymap(str)
+lista = df[coluna].tolist()
+
+# Obtendo a quantidade de repetição com base na quantidade de itens
+total = len(lista)
+i = 0
 
 time.sleep(5)
-
-py.press('win')
-py.write('edge')
-py.press('enter')
-time.sleep(2)
-py.write('https://login.microsoftonline.com/f8c68086-b95c-49cb-9d38-ed37940abef5/oauth2/authorize?client_id=e95c4605-aeab-48d9-9c36-1a262ef8048e&redirect_uri=https%3A%2F%2Faccounts.cloud.com%2Fcore%2Flogin-azuread&resource=https%3A%2F%2Fgraph.microsoft.com%2F&response_type=code%20id_token&scope=openid%20email&response_mode=form_post&nonce=638144144362233522.YWNmMGRiYmYtM2MyNS00NWNlLTg1ZDItMTgyZmNiMmY4NGU5OTBiOTg3YzMtZmU1NC00NzRlLTllMzItMTAzZTY1MTdiZThj&prompt=login&state=CfDJ8LclyOhazMdJkkZzS2eIseVfXT8lv_pcJjKfQxVUlrgeAcdQ9JjVAGtRAS_lafCrNxLdVDTYAWX_vkn7jkr2KUnSmUWffmwUqJtEvRha6eaI8F3mB5hQQdOVe763xLTguzIQyvIAHrGEHTGMMi4eNXB7HD-s6UTCazlKg0eWRJSh&x-client-SKU=ID_NET461&x-client-ver=5.3.0.0')
-py.press('enter')
-
-resposta = input('deseja iniciar a segunda fase? y/n')
-if resposta != 'n':
-    print('Por favor, responda com apenas (n) ou (y)')
-
-if resposta != 'y':
-    print('Por favor, responda com apenas (n) ou (y)')
-
-if resposta == 'y':
-    time.sleep(5)
-    py.press('2')
-    py.press('2')
-    py.write('18')
+# Loop para realizar a digitação
+while i <= total:
+    py.write(lista[0])
     py.press('enter')
-    py.write('13')
-    py.press('enter')
-    py.write('448')
-    py.press('enter')
-    py.press('enter')
-    py.press('enter')
-if resposta == 'n':
-    print('processo encerrado')
-
+    lista.pop(0)
+    i = i + 1
+    if i == total:
+        print('acabou')
+        break
+print('finalizado!')
