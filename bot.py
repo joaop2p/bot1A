@@ -3,16 +3,16 @@
 import pandas as pd
 import pyautogui as py
 import time
-# Dando as opções para o usuário escolher seu arquivo/coluna
-arquivo = input('Coloque o Arquivo na pasta e digite o nome dele.')
-coluna = input('Nome Coluna: ')
+
 # Pegando uma tebela, transformando tudo em string para poder digitar e colocar todos os itens de uma coluna em uma lista
-df = pd.DataFrame(pd.read_csv(arquivo))
-df = df.applymap(str)
-lista = df[coluna].tolist()
+df = pd.DataFrame(pd.read_csv('Dados.csv'))
+ordem = df.sort_values(by='UC')
+df = ordem.applymap(str)
+lista = df['NCT'].tolist()
 
 # Obtendo a quantidade de repetição com base na quantidade de itens
 total = len(lista)
+QuantidadeFeita = len(lista)
 i = 0
 
 time.sleep(5)
@@ -25,4 +25,5 @@ while i <= total:
     if i == total:
         print('acabou')
         break
-print('finalizado!')
+print('finalizado! Foram Realizadas: ', QuantidadeFeita, ' preenchimentos.')
+time.sleep(5)
